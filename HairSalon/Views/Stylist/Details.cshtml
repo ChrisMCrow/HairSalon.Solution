@@ -1,31 +1,18 @@
 <div class="container">
   <div class="row">
     <div class="col-md-4" id="sidebar">
-      <form action="/stylist/new" method="post">
-        <h3>Add a New Stylist</h3>
-        <div class="form-group">
-          <label for="stylistName">Name</label>
-          <input class="form-control" name="stylistName" type="text" placeholder="Last, First">
-        </div>
-        <button type="submit" class="btn btn-info">Add</button>
-      </form>
     </div>
     <div class="col-md-8" id="content">
       <h1>Stylists</h1>
       <hr />
-      @foreach (var item in Model)
-      {
-        <h3>@item.GetStylistName()</h3>
-      }
     </div>
-  </div>
   <div class="row">
     <div class="col-md-4" id="sidebar">
-      <form action="/stylist/new" method="post">
-        <h3>Add a New Stylist</h3>
+      <form action="/client/new" method="post">
+        <h3>Add a New Client for @Model.GetStylistName()</h3>
         <div class="form-group">
-          <label for="stylistName">Name</label>
-          <input class="form-control" name="stylistName" type="text" placeholder="Last, First">
+          <label for="clientName">Name</label>
+          <input class="form-control" name="clientName" type="text" placeholder="Last, First">
         </div>
         <button type="submit" class="btn btn-info">Add</button>
       </form>
@@ -33,9 +20,9 @@
     <div class="col-md-8" id="content">
       <h1>Stylists</h1>
       <hr />
-      @foreach (var item in Model)
+      @foreach (var item in Model.GetClients())
       {
-        <h3>@item.GetStylistName()</h3>
+        <h3>@item.GetClientName()</h3>
       }
     </div>
   </div>

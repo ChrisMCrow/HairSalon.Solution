@@ -69,7 +69,7 @@ namespace HairSalon.Models
             MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
             cmd.CommandText = @"INSERT INTO stylists (stylist_name) VALUES (@stylistName);";
 
-            cmd.Parameters.Add(new MySqlParameter("@stylistName", this._stylistName));
+            cmd.Parameters.Add(new MySqlParameter("@stylistName", _stylistName));
 
             cmd.ExecuteNonQuery();
             _stylistId = (int) cmd.LastInsertedId;
@@ -106,5 +106,7 @@ namespace HairSalon.Models
             }
             return allStylists;
         }
+
+        
     }
 }
