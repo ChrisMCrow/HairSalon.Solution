@@ -21,17 +21,15 @@ A website that allows user to keep track of stylists and clients. It allows styl
 
 1. Clone this repository.
 2. Create a database using the following SQL commands:
-  > CREATE DATABASE to_do;
+  > CREATE DATABASE Chris_Crow;
 
-  > USE to_do;
+  > USE Chris_Crow;
 
-  > CREATE TABLE categories (id serial PRIMARY KEY, name VARCHAR(255));
+  > CREATE TABLE stylists (stylist_id serial PRIMARY KEY, stylist_name VARCHAR(255));
 
-  > CREATE TABLE tasks (id serial PRIMARY KEY, description VARCHAR(255));
+  > CREATE TABLE clients (client_id serial PRIMARY KEY, client_name VARCHAR(255), stylist_id INT(11));
 
-3. Edit the Startup.cs file to reference your database.
-
-4. Navigate to the HairSalon folder in command shell and use the following commands:
+3. Navigate to the HairSalon folder in command shell and use the following commands:
   > dotnet restore
 
   > dotnet run
