@@ -1,0 +1,5 @@
+/Users/Chris/Desktop/HairSalon.Solution/HairSalon.Tests/bin/Debug/netcoreapp1.1/HairSalon.Tests.deps.json
+/Users/Chris/Desktop/HairSalon.Solution/HairSalon.Tests/bin/Debug/netcoreapp1.1/HairSalon.Tests.runtimeconfig.json
+/Users/Chris/Desktop/HairSalon.Solution/HairSalon.Tests/bin/Debug/netcoreapp1.1/HairSalon.Tests.runtimeconfig.dev.json
+/Users/Chris/Desktop/HairSalon.Solution/HairSalon.Tests/obj/Debug/netcoreapp1.1/HairSalon.Tests.csproj.CoreCompileInputs.cache
+/Users/Chris/Desktop/HairSalon.Solution/HairSalon.Tests/obj/Debug/netcoreapp1.1/HairSalon.Tests.AssemblyInfo.cs
