@@ -26,10 +26,11 @@ namespace HairSalon.Controllers
             return View("Details", Stylist.Find(stylistId));
         }
 
-        [HttpPost("/stylist/{stylistId}/delete")]
-        public ActionResult Delete(int stylistId)
+        [HttpGet("/stylist/{stylistId}/delete")]
+        public ActionResult DeleteStylist(int stylistId)
         {
-            Stylist.Find(stylistId).Delete();
+            Stylist foundStylist = Stylist.Find(stylistId);
+            foundStylist.Delete();
             return RedirectToAction("Index", "Home");
         }
     }
