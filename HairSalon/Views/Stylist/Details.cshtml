@@ -18,9 +18,9 @@
       </form>
     </div>
     <div class="col-md-8" id="content">
-      <h1>Stylists</h1>
+      <h1>@Model.GetStylistName()</h1>
       <hr />
-      @foreach (var item in Model.GetClients())
+      @foreach (var item in Model)
       {
         <h3>@item.GetClientName()</h3>
       }
