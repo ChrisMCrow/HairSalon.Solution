@@ -57,5 +57,20 @@ namespace HairSalon.Tests
             //Assert
             Assert.AreEqual(result, testStylist);
         }
+
+        [TestMethod]
+        public void Delete_DatabaseDeletesObject_0()
+        {
+            //Arrange
+            Stylist testStylist = new Stylist ("Lady Gaga");
+            testStylist.Save();
+
+            //Act
+            testStylist.Delete();
+            List<Stylist> result = Stylist.GetAll();
+
+            //Assert
+            Assert.AreEqual(0, result.Count);
+        }
     }
 }

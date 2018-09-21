@@ -7,7 +7,7 @@ namespace HairSalon.Controllers
     public class StylistController : Controller
     {
         [HttpPost("/stylist/new")]
-        public ActionResult Create(string stylistName)
+        public ActionResult CreateStylist(string stylistName)
         {
             new Stylist(stylistName).Save();
             return RedirectToAction("Index", "Home");
@@ -20,10 +20,17 @@ namespace HairSalon.Controllers
         }
 
         [HttpPost("/stylist/{stylistId}/newClient")]
-        public ActionResult Create(string clientName, int stylistId)
+        public ActionResult CreateClient(string clientName, int stylistId)
         {
             new Client(clientName, stylistId).Save();
             return View("Details", Stylist.Find(stylistId));
+        }
+
+        [HttpPost("/stylist/{stylistId}/delete")]
+        public ActionResult Delete(int stylistId)
+        {
+            Stylist.Find(stylistId).Delete();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
