@@ -18,7 +18,7 @@ namespace HairSalon.Tests
             testStylist.Save();
 
             //Act
-            ActionResult detailsView = controller.Details(testStylist.GetStylistId());
+            ActionResult detailsView = controller.Details(testStylist.Id);
 
             //Assert
             Assert.IsInstanceOfType(detailsView, typeof(ViewResult));

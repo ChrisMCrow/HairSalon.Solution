@@ -10,7 +10,9 @@ namespace HairSalon.Tests
     {
         public void Dispose()
         {
-            Stylist.ClearAll();
+          Client.ClearAll();
+          Stylist.ClearAll();
+          Specialty.ClearAll();
         }
 
         public StylistTest()
@@ -49,7 +51,7 @@ namespace HairSalon.Tests
             //Arrange
             Stylist testStylist = new Stylist ("Joan Jett");
             testStylist.Save();
-            int testId = testStylist.GetStylistId();
+            int testId = testStylist.Id;
 
             //Act
             Stylist result = Stylist.Find(testId);
@@ -71,6 +73,25 @@ namespace HairSalon.Tests
 
             //Assert
             Assert.AreEqual(0, result.Count);
+        }
+
+        [TestMethod]
+        public void GetClients_ReturnsListOfClients_ClientList()
+        {
+            //Arrange
+            Stylist testStylist = new Stylist ("Lady Gaga");
+            testStylist.Save();
+            Client clientOne = new Client ("Jones McGuffin", testStylist.Id);
+            clientOne.Save();
+            Client clientTwo = new Client ("Freda McGuffin", testStylist.Id);
+            clientTwo.Save();
+
+            //Act
+            List<Client> testClients = testStylist.GetClients();
+            List<Client> controlClients = new List<Client> {clientOne, clientTwo};
+
+            //Assert
+            Assert.AreEqual(controlClients.Count, testClients.Count);
         }
     }
 }
