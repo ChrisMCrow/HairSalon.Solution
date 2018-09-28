@@ -61,21 +61,6 @@ namespace HairSalon.Tests
         }
 
         [TestMethod]
-        public void Delete_DatabaseDeletesObject_0()
-        {
-            //Arrange
-            Stylist testStylist = new Stylist ("Lady Gaga");
-            testStylist.Save();
-
-            //Act
-            testStylist.Delete();
-            List<Stylist> result = Stylist.GetAll();
-
-            //Assert
-            Assert.AreEqual(0, result.Count);
-        }
-
-        [TestMethod]
         public void GetClients_ReturnsListOfClients_ClientList()
         {
             //Arrange
@@ -92,6 +77,54 @@ namespace HairSalon.Tests
 
             //Assert
             Assert.AreEqual(controlClients.Count, testClients.Count);
+        }
+
+        [TestMethod]
+        public void Update_NameInDatabase_NewStylist()
+        {
+            //Arrange
+            Stylist oldStylist = new Stylist("Puff Daddy");
+            oldStylist.Save();
+            Stylist newStylist = new Stylist("P Diddy", oldStylist.Id);
+
+            //Act
+            oldStylist.Update("P Diddy");
+            Stylist result = Stylist.Find(oldStylist.Id);
+
+            //Assert
+            Assert.AreEqual(newStylist, result);
+        }
+
+        [TestMethod]
+        public void AddSpecialty_AddsStylistSpecialtyRelationship_()
+        {
+            //Arrange
+            Stylist testSty = new Stylist("R Kelly");
+            testSty.Save();
+            Specialty testSpc = new Specialty("Being trapped in the closet");
+            testSpc.Save();
+
+            //Act
+            Stylist.AddSpecialty(testSty.Id, testSpc.Id);
+            List<Specialty> result = testSty.GetSpecialties();
+
+            //Assert
+            Assert.AreEqual(1, result.Count);
+        }
+
+        [TestMethod]
+        public void Delete_DatabaseDeletesObject_0()
+        {
+            //Arrange
+            Stylist testStylist = new Stylist("Lady Gaga");
+            testStylist.Save();
+
+            //Act
+            testStylist.Delete();
+            List<Stylist> result = Stylist.GetAll();
+
+            //Assert
+            Assert.AreEqual(0, result.Count);
         }
     }
 }
