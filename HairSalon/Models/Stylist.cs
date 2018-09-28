@@ -7,6 +7,7 @@ namespace HairSalon.Models
 {
     public class Stylist
     {
+//VARIABLES & CONSTRUCTOR
         public int Id {get; set; }
         public string Name {get; set; }
 
@@ -16,6 +17,7 @@ namespace HairSalon.Models
             this.Id = id;
         }
 
+//OVERRIDES
         public override bool Equals(System.Object otherStylist)
         {
             if(!(otherStylist is Stylist))
@@ -41,7 +43,6 @@ namespace HairSalon.Models
             return String.Format("{{id = {0}, name = {1}}}", Id, Name);
         }
 
-
 //CREATE
         public void Save()
         {
@@ -65,30 +66,30 @@ namespace HairSalon.Models
 //READ
         public static Stylist Find(int stylistId)
         {
-          MySqlConnection conn = DB.Connection();
-          conn.Open();
-          MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-          cmd.CommandText = @"SELECT * FROM stylists WHERE stylist_id = @stylistId;";
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"SELECT * FROM stylists WHERE stylist_id = @stylistId;";
 
-          cmd.Parameters.Add(new MySqlParameter("@stylistId", stylistId));
+            cmd.Parameters.Add(new MySqlParameter("@stylistId", stylistId));
 
-          var rdr = cmd.ExecuteReader() as MySqlDataReader;
-          int id = 0;
-          string name = "";
-          while (rdr.Read())
-          {
-            id = rdr.GetInt32(0);
-            name = rdr.GetString(1);
-          }
-          Stylist foundStylist = new Stylist(name, id);
+            var rdr = cmd.ExecuteReader() as MySqlDataReader;
+            int id = 0;
+            string name = "";
+            while (rdr.Read())
+            {
+                id = rdr.GetInt32(0);
+                name = rdr.GetString(1);
+            }
+            Stylist foundStylist = new Stylist(name, id);
 
-          conn.Close();
-          if (conn != null)
-          {
-            conn.Dispose();
-          }
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
 
-          return foundStylist;
+            return foundStylist;
         }
 
         public static List<Stylist> GetAll()

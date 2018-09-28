@@ -24,8 +24,8 @@ namespace HairSalon.Tests
         public void Equals_ReturnsTrueForSameNameAndId_True()
         {
             //Arrange, Act
-            Specialty firstSpecialty = new Specialty("Hair");
-            Specialty secondSpecialty = new Specialty("Hair");
+            Specialty firstSpecialty = new Specialty("Lasers");
+            Specialty secondSpecialty = new Specialty("Lasers");
 
             //Assert
             Assert.AreEqual(firstSpecialty, secondSpecialty);
@@ -35,7 +35,7 @@ namespace HairSalon.Tests
         public void Save_SavesSpecialtyToDatabase_SpecialtyList()
         {
             //Arrange
-            Specialty testSpecialty = new Specialty("Paul McGuire", 1);
+            Specialty testSpecialty = new Specialty("Telepathy", 1);
 
             //Act
             testSpecialty.Save();
@@ -43,6 +43,38 @@ namespace HairSalon.Tests
 
             //Assert
             Assert.AreEqual(testSpecialty, resultList[0]);
+        }
+
+        [TestMethod]
+        public void Find_DatabaseFindsObjectById_StylistObject()
+        {
+            //Arrange
+            Specialty testSpecialty = new Specialty("Invlunerability");
+            testSpecialty.Save();
+            int testId = testSpecialty.Id;
+
+            //Act
+            Specialty result = Specialty.Find(testId);
+
+            //Assert
+            Assert.AreEqual(result, testSpecialty);
+        }
+
+        [TestMethod]
+        public void GetStylists_ReturnsSpecialtysStylists_StylistList()
+        {
+            //Arrange
+            Specialty testSpecialty = new Specialty("Ninja Moves");
+            testSpecialty.Save();
+            Stylist testStylist = new Stylist("Adam Levine");
+            testStylist.Save();
+
+            //Act
+            Stylist.AddSpecialty(testStylist.Id, testSpecialty.Id);
+            List<Stylist> result = testSpecialty.GetStylists();
+
+            //Assert
+            Assert.AreEqual(testStylist, result[0]);
         }
     }
 }
