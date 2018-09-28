@@ -1,0 +1,15 @@
+.delete {
+  color: #dc3545;
+}
+
+.delete:hover {
+  color: maroon;
+}
+
+.update {
+  color: #ffc107;
+}
+
+.update:hover {
+  color: orange;
+}

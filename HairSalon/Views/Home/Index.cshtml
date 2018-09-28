@@ -1,16 +1,16 @@
 <!--Nav Tabs-->
 <ul class="nav nav-tabs">
   <li class="nav-item">
-    <a class="nav-link active" href="#">Stylists</a>
+    <a class="nav-link active">Stylists</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="/specialties">Specialties</a>
+    <a class="nav-link" href="/specialty">Specialties</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="/clients">Clients</a>
+    <a class="nav-link" href="/client">Clients</a>
   </li>
 </ul>
-
+<br><br>
 
 <!--Body-->
 <div class="row">
@@ -21,7 +21,7 @@
         <label for="stylistName">Name</label>
         <input class="form-control" name="stylistName" type="text" placeholder="First Last">
       </div>
-      <button type="submit" class="btn btn-info">Add</button>
+      <button type="submit" class="btn btn-success">Add</button>
     </form>
   </div>
   <div class="col-md-8" id="content">
@@ -29,8 +29,9 @@
     <hr />
     @foreach (var item in Model)
     {
-      <h3><a href="/stylist/@item.GetStylistId()">@item.GetStylistName()
-      </a></h3>  <h5><a href="/stylist/@item.GetStylistId()/delete">Delete</a></h5>
+      <h3><a href="/stylist/@item.Id">@item.Name
+      </a></h3>
+      <h6><a class='update' href='/stylist/@item.Id/update'>Update</a> | <a class='delete' href="/stylist/@item.Id/delete">Delete</a></h6>
     }
   </div>
 </div>
