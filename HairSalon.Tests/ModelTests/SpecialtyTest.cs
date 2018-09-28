@@ -35,7 +35,7 @@ namespace HairSalon.Tests
         public void Save_SavesSpecialtyToDatabase_SpecialtyList()
         {
             //Arrange
-            Specialty testSpecialty = new Specialty("Telepathy", 1);
+            Specialty testSpecialty = new Specialty("Pyros", 1);
 
             //Act
             testSpecialty.Save();
@@ -75,6 +75,37 @@ namespace HairSalon.Tests
 
             //Assert
             Assert.AreEqual(testStylist, result[0]);
+        }
+
+        [TestMethod]
+        public void Update_NameInDatabase_NewStylist()
+        {
+            //Arrange
+            Specialty oldSpecialty = new Specialty("Telepathy");
+            oldSpecialty.Save();
+            Specialty newSpecialty = new Specialty("Diamond Skin", oldSpecialty.Id);
+
+            //Act
+            oldSpecialty.Update("Diamond Skin");
+            Specialty result = Specialty.Find(oldSpecialty.Id);
+
+            //Assert
+            Assert.AreEqual(newSpecialty, result);
+        }
+
+        [TestMethod]
+        public void Delete_DeletesObject_0()
+        {
+            //Arrange
+            Specialty testSpecialty = new Specialty("Flight");
+            testSpecialty.Save();
+
+            //Act
+            testSpecialty.Delete();
+            List<Specialty> result = Specialty.GetAll();
+
+            //Assert
+            Assert.AreEqual(0, result.Count);
         }
     }
 }
