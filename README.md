@@ -28,6 +28,10 @@ A website that allows user to keep track of stylists and clients. It allows styl
   > CREATE TABLE stylists (stylist_id serial PRIMARY KEY, stylist_name VARCHAR(255));
 
   > CREATE TABLE clients (client_id serial PRIMARY KEY, client_name VARCHAR(255), stylist_id INT(11));
+  
+  > CREATE TABLE specialties (specialty_id serial PRIMARY KEY, specialty_name VARCHAR(255));
+  
+  > CREATE TABLE stylists_specialties (id serial PRIMARY KEY, stylist_id INT(11), specialty_id INT(11));
 
 3. Navigate to the HairSalon folder in command shell and use the following commands:
   > dotnet restore
