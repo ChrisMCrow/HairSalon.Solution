@@ -16,7 +16,7 @@
 
 <div class="row">
   <div class="col-md-4" id="sidebar">
-    <form action="/stylist/@Model.Id/newClient" method="post">
+    <form action="/specialty/new" method="post">
       <h3>Add a New Specialty</h3>
       <div class="form-group">
         <label for="description">Description</label>
@@ -30,8 +30,7 @@
     <hr />
     @foreach (var item in @Specialty.GetAll())
     {
-      <h3><a href="/specialty/@item.Id">@item.Name
-      </a></h3>
+      <h3>@item.Name</h3>
       <h6><a class='update' href='/specialty/@item.Id/update'>Update</a> | <a class='delete' href="/specialty/@item.Id/delete">Delete</a></h6>
     }
     <br>

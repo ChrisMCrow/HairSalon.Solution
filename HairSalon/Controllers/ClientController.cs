@@ -6,12 +6,54 @@ namespace HairSalon.Controllers
 {
     public class ClientController : Controller
     {
-        [HttpPost("/client/new")]
-        public ActionResult Create(string clientName, int stylistId)
+        [HttpGet("/client")]
+        public ActionResult Index()
         {
-            new Client(clientName, stylistId).Save();
-            Stylist foundStylist = Stylist.Find(stylistId);
-            return View("Stylist/Details", foundStylist);
+          return View(Client.GetAll());
         }
+
+        [HttpPost("/client/new")]
+        public ActionResult CreateClient(string clientName, string stylistId)
+        {
+            new Client(clientName, int.Parse(stylistId)).Save();
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet("/client/{clientId}/delete")]
+        public ActionResult DeleteClient(int clientId)
+        {
+            Client foundClient = Client.Find(clientId);
+            foundClient.Delete();
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet("/client/{clientId}/update")]
+        public ActionResult UpdateClientForm(int clientId)
+        {
+            Client foundClient = Client.Find(clientId);
+            return View("Update", foundClient);
+        }
+
+        [HttpPost("/client/{clientId}/update")]
+        public ActionResult UpdateClient(int clientId, string newName, string stylistId)
+        {
+            Client foundClient = Client.Find(clientId);
+            foundClient.Update(newName, int.Parse(stylistId));
+            return RedirectToAction("UpdateClientForm", new {clientId = foundClient.Id});
+        }
+
+        // [HttpPost("/client/{clientId}/update/stylist")]
+        // public ActionResult UpdateStylist(int clientId, string stylist)
+        // {
+        //     Stylist.AddClient(int.Parse(stylist), clientId);
+        //     return RedirectToAction("UpdateClientForm", new {clientId = clientId});
+        // }
+        //
+        // [HttpGet("/client/{clientId}/remove/{stylistId}")]
+        // public ActionResult DeleteClient(int clientId, int stylistId)
+        // {
+        //     Stylist.RemoveClient(stylistId, clientId);
+        //     return RedirectToAction("UpdateClientForm", new {clientId = clientId});
+        // }
     }
 }

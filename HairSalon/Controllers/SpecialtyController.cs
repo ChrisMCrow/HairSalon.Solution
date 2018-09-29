@@ -13,23 +13,10 @@ namespace HairSalon.Controllers
         }
 
         [HttpPost("/specialty/new")]
-        public ActionResult CreateSpecialty(string specialtyName)
+        public ActionResult CreateSpecialty(string description)
         {
-            new Specialty(specialtyName).Save();
-            return RedirectToAction("Index", "Home");
-        }
-
-        [HttpGet("/specialty/{specialtyId}")]
-        public ActionResult Details(int specialtyId)
-        {
-            return View(Specialty.Find(specialtyId));
-        }
-
-        [HttpPost("/specialty/{specialtyId}/newClient")]
-        public ActionResult CreateClient(string clientName, int specialtyId)
-        {
-            new Client(clientName, specialtyId).Save();
-            return View("Details", Specialty.Find(specialtyId));
+            new Specialty(description).Save();
+            return RedirectToAction("Index");
         }
 
         [HttpGet("/specialty/{specialtyId}/delete")]
@@ -37,7 +24,7 @@ namespace HairSalon.Controllers
         {
             Specialty foundSpecialty = Specialty.Find(specialtyId);
             foundSpecialty.Delete();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index");
         }
 
         [HttpGet("/specialty/{specialtyId}/update")]
@@ -55,17 +42,17 @@ namespace HairSalon.Controllers
             return RedirectToAction("UpdateSpecialtyForm", new {specialtyId = foundSpecialty.Id});
         }
 
-        [HttpPost("/specialty/{specialtyId}/update/specialty")]
-        public ActionResult UpdateSpecialty(int specialtyId, string specialty)
+        [HttpPost("/specialty/{specialtyId}/update/stylist")]
+        public ActionResult UpdateStylist(int specialtyId, string stylist)
         {
-            Specialty.AddSpecialty(specialtyId, int.Parse(specialty));
+            Stylist.AddSpecialty(int.Parse(stylist), specialtyId);
             return RedirectToAction("UpdateSpecialtyForm", new {specialtyId = specialtyId});
         }
 
         [HttpGet("/specialty/{specialtyId}/remove/{stylistId}")]
-        public ActionResult DeleteSpecialty(int specialtyId, int specialtyId)
+        public ActionResult DeleteSpecialty(int specialtyId, int stylistId)
         {
-            Specialty.RemoveSpecialty(specialtyId, specialtyId);
+            Stylist.RemoveSpecialty(stylistId, specialtyId);
             return RedirectToAction("UpdateSpecialtyForm", new {specialtyId = specialtyId});
         }
     }

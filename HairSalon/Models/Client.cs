@@ -104,7 +104,7 @@ namespace HairSalon.Models
             conn.Open();
 
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"SELECT * FROM clients;";
+            cmd.CommandText = @"SELECT * FROM clients ORDER BY client_name ASC;";
 
             var rdr = cmd.ExecuteReader() as MySqlDataReader;
             while (rdr.Read())
@@ -123,14 +123,15 @@ namespace HairSalon.Models
         }
 
 //UPDATE
-        public void Update(string name)
+        public void Update(string name, int stylistId)
         {
             MySqlConnection conn = DB.Connection();
             conn.Open();
             MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"UPDATE clients SET client_name = @newName WHERE client_id = @thisId;";
+            cmd.CommandText = @"UPDATE clients SET client_name = @newName, stylist_id = @newId WHERE client_id = @thisId;";
 
             cmd.Parameters.AddWithValue("@newName", name);
+            cmd.Parameters.AddWithValue("@newId", stylistId);
             cmd.Parameters.AddWithValue("@thisId", this.Id);
             cmd.ExecuteNonQuery();
 

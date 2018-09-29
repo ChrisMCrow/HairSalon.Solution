@@ -22,7 +22,8 @@ namespace HairSalon.Controllers
         [HttpGet("/stylist/{stylistId}")]
         public ActionResult Details(int stylistId)
         {
-            return View(Stylist.Find(stylistId));
+            Stylist foundStylist = Stylist.Find(stylistId);
+            return View("Details", foundStylist);
         }
 
         [HttpPost("/stylist/{stylistId}/newClient")]
